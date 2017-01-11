@@ -1,0 +1,17 @@
+import React from 'react';
+
+const Header = props => {
+  return (
+    <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header className="mdl-layout__header">
+        <div className="mdl-layout__header-row">
+          <span className="mdl-layout-title">Flipkart Profiler</span>
+          <div className="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div className="mdl-layout__drawer" />
+    </div>
+  );
+};
+
+export default Header;
