@@ -2,7 +2,7 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
-} from '../actions/PostActions';
+} from 'actions/PostActions';
 
 const INITIAL_STATE = {
   posts: [],

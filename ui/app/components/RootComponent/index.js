@@ -1,3 +1,3 @@
-import RootComponent from './RootComponent';
+import RootComponent from 'components/RootComponent/RootComponent';
 
 export default RootComponent;

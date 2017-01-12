@@ -12,7 +12,7 @@ import 'material-design-lite/material.css';
 
 import store from './store';
 
-import Root from './components/RootComponent';
+import Root from 'components/RootComponent';
 
 const routes = (
   <Route path="/" component={Root} />

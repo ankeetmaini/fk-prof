@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../HeaderComponent';
+import Header from 'components/HeaderComponent';
 
-import './RootComponent.css';
+import 'components/RootComponent/RootComponent.css';
 
 const BaseComponent = Component => class extends React.Component {
   componentDidUpdate () {

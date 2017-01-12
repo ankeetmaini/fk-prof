@@ -2,7 +2,6 @@ const express = require('express');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const session = require('express-session');
 
 const env = process.env.NODE_ENV;
 const isDevelopment = env !== 'production';
@@ -11,12 +10,6 @@ const app = express();
 const publicPath = path.resolve(__dirname, 'public');
 
 app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  name: 'XKCD_ROCKS!',
-}));
 
 if (isDevelopment) {
   const webpack = require('webpack');
