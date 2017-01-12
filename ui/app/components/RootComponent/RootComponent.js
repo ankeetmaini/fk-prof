@@ -3,23 +3,21 @@ import Header from '../HeaderComponent';
 
 import './RootComponent.css';
 
-const BaseComponent = (Component) => {
-  return class extends React.Component {
-    componentDidUpdate () {
+const BaseComponent = Component => class extends React.Component {
+  componentDidUpdate () {
       componentHandler.upgradeDom(); // eslint-disable-line
-    }
+  }
 
-    render () {
-      return <Component {...this.props}/>;
-    }
+  render () {
+    return <Component {...this.props} />;
+  }
   };
-};
 
 class RootComponent extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <Header/>
+        <Header />
         <main className="app mdl-layout__content">
           <div className="page-content">
             {this.props.children}

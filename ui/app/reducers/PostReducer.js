@@ -1,12 +1,12 @@
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
-  GET_POSTS_FAILURE
+  GET_POSTS_FAILURE,
 } from '../actions/PostActions';
 
 const INITIAL_STATE = {
   posts: [],
-  asyncStatus: 'INIT'
+  asyncStatus: 'INIT',
 };
 
 export default function (state = INITIAL_STATE, action) {

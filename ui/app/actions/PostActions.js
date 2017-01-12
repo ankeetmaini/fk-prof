@@ -6,15 +6,15 @@ export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 export const GET_POSTS_FAILURE = 'GET_POSTS_FAILURE';
 
 export function getPostsRequestAction () {
-  return {type: GET_POSTS_REQUEST};
+  return { type: GET_POSTS_REQUEST };
 }
 
 export function getPostsSuccessAction (posts) {
-  return {type: GET_POSTS_SUCCESS, data: posts};
+  return { type: GET_POSTS_SUCCESS, data: posts };
 }
 
 export function getPostsFailureAction (error) {
-  return {type: GET_POSTS_FAILURE, error};
+  return { type: GET_POSTS_FAILURE, error };
 }
 
 export function fetchPostsAction () {
