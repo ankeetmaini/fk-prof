@@ -19,13 +19,13 @@ export function getClusterIdsFailureAction (error) {
 
 export function fetchClusterIdsAction ({ appId, query }) {
   return (dispatch) => {
-    dispatch(getClusterIdsRequestAction());
+    dispatch(getClusterIdsRequestAction({ req: appId }));
     const queryParams = objectToQueryParams(query);
     const baseUrl = `/apps${appId}`;
     const url = queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
     return fetch(url)
       .then(response => response.json())
-      .then(json => dispatch(getClusterIdsSuccessAction(json)))
+      .then(json => dispatch(getClusterIdsSuccessAction({ res: json, req: appId })))
       .catch(err => dispatch(getClusterIdsFailureAction(err)));
   };
 }
