@@ -2,54 +2,61 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { getClustersAction } from 'actions/ClusterActionCreator';
+import fetchClustersAction from 'actions/ClusterActions';
 import safeTraverse from 'utils/safeTraverse';
 
-import 'react-select/dist/react-select.min.css';
+import styles from './ClusterSelectComponent.css';
+
+const noop = () => {};
 
 class ClusterSelectComponent extends Component {
-
   componentDidMount () {
-    const { appId } = this.props;
-    if (appId) {
-      this.props.getClusters({ appId });
+    const { app } = this.props;
+    if (app) {
+      this.props.getClusters({ app });
     }
   }
 
-  componentWillRecieveProps (nextProps) {
-    if (nextProps.appId !== this.props.appId) {
-      this.props.getClusters({ appId: nextProps.appId });
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.app !== this.props.app) {
+      this.props.getClusters({ app: nextProps.app });
     }
   }
 
   render () {
     const { onChange, clusters, selectedCluster } = this.props;
-    const clusterList = clusters.asyncStatus === 'SUCCESS' ? clusters.list : [];
-    return (<Select
-      clearable={false}
-      options={clusterList}
-      onChange={onChange}
-      labelKey="name"
-      valueKey="name"
-      isLoading={clusters.asyncStatus === 'PENDING'}
-      name="user-search"
-      value={selectedCluster}
-      noResultsText={clusters.asyncStatus !== 'PENDING' ? 'No results to display' : 'Searching...'}
-      placeholder="Type to search..."
-    />);
+    const clusterList = clusters.asyncStatus === 'SUCCESS'
+      ? clusters.list.map(c => ({ name: c })) : [];
+    return (
+      <div>
+        <label className={styles.label} htmlFor="cluster">Select Cluster</label>
+        <Select
+          id="cluster"
+          clearable={false}
+          options={clusterList}
+          onChange={onChange || noop}
+          labelKey="name"
+          valueKey="name"
+          isLoading={clusters.asyncStatus === 'PENDING'}
+          value={selectedCluster}
+          noResultsText={clusters.asyncStatus !== 'PENDING' ? 'No results found!' : 'Searching...'}
+          placeholder="Type to search..."
+        />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  clusters: safeTraverse(state, ['clusters', ownProps.appId]) || {},
+  clusters: safeTraverse(state, ['clusters', ownProps.app]) || {},
 });
 
 const mapDispatchToProps = dispatch => ({
-  getClusters: params => dispatch(getClustersAction(params)),
+  getClusters: params => dispatch(fetchClustersAction(params)),
 });
 
 ClusterSelectComponent.propTypes = {
-  appId: PropTypes.string,
+  app: PropTypes.string,
   clusters: PropTypes.object.isRequired,
   getClusters: PropTypes.func.isRequired,
   onChange: PropTypes.func,
