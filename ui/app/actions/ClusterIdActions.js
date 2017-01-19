@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { objectToQueryParams } from 'utils/UrlUtils';
+import http from 'utils/http';
 
 export const GET_CLUSTER_IDS_REQUEST = 'GET_CLUSTER_IDS_REQUEST';
 export const GET_CLUSTER_IDS_SUCCESS = 'GET_CLUSTER_IDS_SUCCESS';
@@ -23,7 +24,7 @@ export function fetchClusterIdsAction ({ appId, query }) {
     const queryParams = objectToQueryParams(query);
     const baseUrl = `/apps${appId}`;
     const url = queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
-    return fetch(url)
+    return http.get(url)
       .then(response => response.json())
       .then(json => dispatch(getClusterIdsSuccessAction({ res: json, req: appId })))
       .catch(err => dispatch(getClusterIdsFailureAction(err)));
