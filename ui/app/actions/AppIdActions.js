@@ -18,7 +18,7 @@ export function getAppIdsFailureAction (error) {
   return { type: GET_APP_IDS_FAILURE, error };
 }
 
-export function fetchAppIdsAction (params) {
+export default function fetchAppIdsAction (params) {
   return (dispatch) => {
     dispatch(getAppIdsRequestAction());
     const queryParams = objectToQueryParams(params);
