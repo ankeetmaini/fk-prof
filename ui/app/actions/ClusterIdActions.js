@@ -1,6 +1,7 @@
-import fetch from 'isomorphic-fetch';
 import { objectToQueryParams } from 'utils/UrlUtils';
 import http from 'utils/http';
+
+import mockCluster from '../../api-mocks/cluster-ids.json';
 
 export const GET_CLUSTER_IDS_REQUEST = 'GET_CLUSTER_IDS_REQUEST';
 export const GET_CLUSTER_IDS_SUCCESS = 'GET_CLUSTER_IDS_SUCCESS';
@@ -24,9 +25,11 @@ export function fetchClusterIdsAction ({ appId, query }) {
     const queryParams = objectToQueryParams(query);
     const baseUrl = `/apps${appId}`;
     const url = queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
-    return http.get(url)
-      .then(response => response.json())
-      .then(json => dispatch(getClusterIdsSuccessAction({ res: json, req: appId })))
+    // return http.get(url)
+    //   .then(response => response.json())
+    return Promise.resolve()
+      .then(() => dispatch(getClusterIdsSuccessAction({ res: mockCluster, req: appId })))
+      // .then(json => dispatch(getClusterIdsSuccessAction({ res: json, req: appId })))
       .catch(err => dispatch(getClusterIdsFailureAction(err)));
   };
 }
