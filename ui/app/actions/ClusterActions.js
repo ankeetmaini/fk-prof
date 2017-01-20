@@ -3,20 +3,20 @@ import http from 'utils/http';
 
 import mockCluster from '../../api-mocks/cluster-ids.json';
 
-export const GET_CLUSTER_IDS_REQUEST = 'GET_CLUSTER_IDS_REQUEST';
-export const GET_CLUSTER_IDS_SUCCESS = 'GET_CLUSTER_IDS_SUCCESS';
-export const GET_CLUSTER_IDS_FAILURE = 'GET_CLUSTER_IDS_FAILURE';
+export const GET_CLUSTERS_REQUEST = 'GET_CLUSTERS_REQUEST';
+export const GET_CLUSTERS_SUCCESS = 'GET_CLUSTERS_SUCCESS';
+export const GET_CLUSTERS_FAILURE = 'GET_CLUSTERS_FAILURE';
 
 export function getClustersRequestAction (req) {
-  return { type: GET_CLUSTER_IDS_REQUEST, ...req };
+  return { type: GET_CLUSTERS_REQUEST, ...req };
 }
 
 export function getClustersSuccessAction (clusterIds) {
-  return { type: GET_CLUSTER_IDS_SUCCESS, data: clusterIds };
+  return { type: GET_CLUSTERS_SUCCESS, data: clusterIds };
 }
 
 export function getClustersFailureAction ({ error, req }) {
-  return { type: GET_CLUSTER_IDS_FAILURE, error, ...req };
+  return { type: GET_CLUSTERS_FAILURE, error, ...req };
 }
 
 export default function fetchClustersAction ({ app, query }) {
