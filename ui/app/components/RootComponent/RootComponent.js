@@ -20,7 +20,7 @@ const BaseComponent = Komponent => class extends Component {
 const RootComponent = props => {
   const updateQueryParams = ({ pathname = '/', query }) => props.router.push({ pathname, query });
   const updateAppIdQueryParam = o => updateQueryParams({ query: { app: o.name } });
-  const updateClusterQueryParam = o => updateQueryParams({ query: { cluster: o.name } });
+  const updateClusterQueryParam = o => updateQueryParams({ query: { ...props.location.query, cluster: o.name } });
 
   const selectedAppId = props.location.query.app;
   const selectedCluster = props.location.query.cluster;
